@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    // Config
     [SerializeField] float speed = 10.0f;
-    Rigidbody2D myRigidbody;
 
-    // Start is called before the first frame update
+    // State
+    bool isAlive = true;
+
+    // Cached component references
+    Rigidbody2D myRigidbody;
+    Animator myAnimator;
+
+    
+    // Message then methods
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,14 +35,21 @@ public class Player : MonoBehaviour
         Vector2 playerVelocity = new Vector2(controlThrow * speed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVelocity;
 
+        print(myRigidbody.velocity);
+        myAnimator.SetBool("Running", IsRunning());
     }
 
     private void FlipSprite()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        bool playerHasHorizontalSpeed = IsRunning();
         if (playerHasHorizontalSpeed)
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
         }
+    }
+
+    private bool IsRunning()
+    {
+        return Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
     }
 }
