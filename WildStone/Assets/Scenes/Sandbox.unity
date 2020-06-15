@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 1421458072}
   - component: {fileID: 1421458074}
   - component: {fileID: 1421458073}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10699,11 +10699,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2669127676666695169, guid: 1da46c0c1ae95c740825ba854c94def0,
-        type: 3}
-      propertyPath: speed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da46c0c1ae95c740825ba854c94def0, type: 3}
