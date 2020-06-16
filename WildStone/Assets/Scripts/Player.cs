@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // Config
     [SerializeField] float speed = 10.0f;
     [SerializeField] float jumpForce = 5.0f;
-    [SerializeField] float climbSpeed = 2.5f;
+    [SerializeField] float climbSpeed = 3.0f;
 
     // State
     bool isAlive = true;
@@ -44,6 +44,18 @@ public class Player : MonoBehaviour
         myAnimator.SetBool("Running", IsRunning());
     }
 
+    private void ClimbLadder()
+    {
+        if (!myCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"))) { return; }
+
+        float controlThrow = Input.GetAxis("Vertical"); // -1 to +1
+        Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, controlThrow * climbSpeed);
+        myRigidbody.velocity = climbVelocity;
+        
+        myAnimator.SetBool("Climbing", PlayerHasVerticalSpeed());
+    }
+
+
     private void Jump()
     {
         if (!myCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {return;}
@@ -55,16 +67,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void ClimbLadder()
-    {
-        if (!myCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"))) { return; }
-
-        float controlThrow = Input.GetAxis("Vertical"); // -1 to +1
-        //Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, controlThrow * climbSpeed);
-        Vector2 playerVelocity = new Vector2(0, controlThrow * climbSpeed);
-        myRigidbody.velocity = playerVelocity;
-        myAnimator.SetBool("Climbing", IsClimbing());
-    }
 
     private void FlipSprite()
     {
@@ -80,7 +82,7 @@ public class Player : MonoBehaviour
         return Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
     }
 
-    private bool IsClimbing()
+    private bool PlayerHasVerticalSpeed()
     {
         return Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
     }

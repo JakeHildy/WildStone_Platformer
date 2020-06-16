@@ -202,7 +202,7 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: -5, y: -9, z: 0}
+  - first: {x: -6, y: -9, z: 0}
     second:
       m_TileIndex: 47
       m_TileSpriteIndex: 46
