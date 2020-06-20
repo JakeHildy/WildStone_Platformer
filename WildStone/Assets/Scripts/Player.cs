@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
         {
             myAnimator.SetTrigger("Die");
             myRigidbody.velocity = deathKick;
