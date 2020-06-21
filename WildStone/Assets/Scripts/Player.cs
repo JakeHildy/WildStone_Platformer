@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 10.0f;
     [SerializeField] float jumpForce = 5.0f;
     [SerializeField] float climbSpeed = 3.0f;
+    [SerializeField] float deathDelay = 1.0f;
     [SerializeField] Vector2 deathKick = new Vector2(25f, 25f);
 
     // State
@@ -49,8 +50,14 @@ public class Player : MonoBehaviour
             myAnimator.SetTrigger("Die");
             myRigidbody.velocity = deathKick;
             isAlive = false;
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            StartCoroutine(DieRoutine());
         }
+    }
+
+    IEnumerator DieRoutine()
+    {
+        yield return new WaitForSeconds(deathDelay);
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
 
     private void Run()
