@@ -9033,7 +9033,7 @@ GameObject:
   - component: {fileID: 1537026394}
   - component: {fileID: 1537026393}
   m_Layer: 5
-  m_Name: Main Menu Canvas
+  m_Name: Win Menu Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
