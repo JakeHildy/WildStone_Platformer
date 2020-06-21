@@ -54,6 +54,9 @@ TagManager:
   - name: Hazards
     uniqueID: 159667017
     locked: 0
+  - name: Particle Effects
+    uniqueID: 2837358195
+    locked: 0
   - name: Player
     uniqueID: 78437327
     locked: 0
