@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeet;
     Animator myAnimator;
+    SoundEffects soundEffects;
     float gravityScaleAtStart;
 
     
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         myFeet = GetComponent<BoxCollider2D>();
         myAnimator = GetComponent<Animator>();
+        soundEffects = FindObjectOfType<SoundEffects>();
         gravityScaleAtStart = myRigidbody.gravityScale;
     }
 
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour
             myAnimator.SetTrigger("Die");
             myRigidbody.velocity = deathKick;
             isAlive = false;
+            soundEffects.PlayHurtSound();
             StartCoroutine(DieRoutine());
         }
     }
@@ -93,8 +96,9 @@ public class Player : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-             Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
+            Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
             myRigidbody.velocity += jumpVelocityToAdd;
+            soundEffects.PlayJumpSound();
         }
     }
 
@@ -116,5 +120,10 @@ public class Player : MonoBehaviour
     private bool PlayerHasVerticalSpeed()
     {
         return Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon;
+    }
+
+    public bool IsAlive()
+    {
+        return isAlive;
     }
 }

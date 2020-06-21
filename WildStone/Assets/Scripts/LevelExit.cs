@@ -10,7 +10,7 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if ((other as CapsuleCollider2D) && (other.gameObject.tag == "Player"))
+        if ((other as CapsuleCollider2D) && (other.gameObject.tag == "Player") && (FindObjectOfType<Player>().IsAlive()))
         {            
             StartCoroutine(LoadNextLevel());
         }

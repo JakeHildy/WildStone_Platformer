@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Music : MonoBehaviour
+public class SoundEffects : MonoBehaviour
 {
 
     [SerializeField] AudioClip musicClip;
+    [SerializeField] AudioClip jumpSoundClip;
+    [SerializeField] AudioClip hurtSoundClip;
 
     AudioSource audioSource;
 
@@ -14,7 +16,7 @@ public class Music : MonoBehaviour
 
     private void Awake() 
     {
-        int numMusics = FindObjectsOfType<Music>().Length;
+        int numMusics = FindObjectsOfType<SoundEffects>().Length;
         if (numMusics > 1)
         {
             Destroy(gameObject);
@@ -33,8 +35,14 @@ public class Music : MonoBehaviour
         audioSource.Play();
     }
 
-    private void Update() 
+    public void PlayJumpSound()
     {
-        
+        AudioSource.PlayClipAtPoint(jumpSoundClip, Camera.main.transform.position);
     }
+
+    public void PlayHurtSound()
+    {
+        AudioSource.PlayClipAtPoint(hurtSoundClip, Camera.main.transform.position);
+    }
+
 }
